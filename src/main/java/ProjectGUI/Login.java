@@ -6,9 +6,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -55,12 +59,44 @@ public class Login extends JFrame {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	Properties properties = new Properties();
+                InputStream inputStream = null;
+                
                 try {
-                    Login frame = new Login();
-                    frame.setVisible(true);
-                } catch (Exception e) {
+                    // Load properties file
+                    inputStream = new FileInputStream("F:\\java\\javainc\\project\\config.properties");
+                    properties.load(inputStream);
+
+                    // Access variables
+                    String userStatus = properties.getProperty("Login.Status");
+                    if(userStatus.equals("true")) {
+                    	mainPage main = new mainPage();
+                    }
+                    else {
+                      try {
+	                      Login frame = new Login();
+	                      frame.setVisible(true);
+	                  } 
+                      catch (Exception e) {
+	                      e.printStackTrace();
+	                  }	
+                   }
+                    
+                } 
+                catch (IOException e) {
                     e.printStackTrace();
+                } 
+                finally {
+                    // Close InputStream
+                    if (inputStream != null) {
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+
             }
         });
     }
@@ -107,8 +143,43 @@ public class Login extends JFrame {
                     	
                         if (dataSnapshot.hasChild(mobile)&& dataSnapshot.child(mobile).getValue().equals(password)) {
                             System.out.println("The 'phoneNumber' node exists under the 'credential' node.");
+                            
+
+                            Properties properties = new Properties();
+                            InputStream inputStream = null;
+                            OutputStream outputStream = null;
+
+                            try {
+                                inputStream = new FileInputStream("F:\\java\\javainc\\project\\config.properties");
+                                properties.load(inputStream);
+
+                                // Change property value
+                              properties.setProperty("Login.Id",mobile);
+                              properties.setProperty("Login.Pass", password);
+                              properties.setProperty("Login.Status", "true");
+
+                                // Save the modified properties back to the file
+                                outputStream = new FileOutputStream("F:\\java\\javainc\\project\\config.properties");
+                                properties.store(outputStream, null);
+
+                                System.out.println("Property value changed successfully.");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+                                // Close streams
+                                try {
+                                    if (inputStream != null)
+                                        inputStream.close();
+                                    if (outputStream != null)
+                                        outputStream.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                             mainPage main = new mainPage();
-                        } else {
+                            
+                        } 
+                        else {
                             System.out.println("The 'phoneNumber' node does not exist under the 'credential' node.");
                         }
                     }
