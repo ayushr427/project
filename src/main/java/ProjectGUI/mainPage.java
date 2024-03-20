@@ -32,6 +32,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JList;
 import javax.swing.JSpinner;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class mainPage extends JFrame {
 
@@ -61,6 +63,15 @@ public class mainPage extends JFrame {
 	public mainPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Setting");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mnNewMenu.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -79,11 +90,15 @@ public class mainPage extends JFrame {
 		// Create data for the table
         Vector<Vector<Object>> data = new Vector<>();
         Vector<String> columnNames = new Vector<>();
-        columnNames.add("Product Name");
-        columnNames.add("Price");
-        columnNames.add("Expiry Date");
-        columnNames.add("Quantity");
-        columnNames.add("Barcode Value");
+        columnNames.add("Bar Code");
+        columnNames.add("Category");
+        columnNames.add("HSN No");
+        columnNames.add("Selling Price");
+        columnNames.add("Marked Price");
+        columnNames.add("Name");
+        columnNames.add("Purchased Price");
+        columnNames.add("Tax");
+        columnNames.add("Sub Category");
 
         // Create the table model
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
@@ -92,7 +107,6 @@ public class mainPage extends JFrame {
                 return false; // Disable cell editing
             }
         };
-
         // Create the table
         JTable table = new JTable(model);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -133,6 +147,7 @@ public class mainPage extends JFrame {
 		setVisible(true);
 	}
 	private static void addSampleData(DefaultTableModel model) {
+		
         model.addRow(new Object[]{"Product A", 10.99, "2024-12-31", 100, "123456789"});
         model.addRow(new Object[]{"Product B", 15.49, "2024-10-15", 50, "987654321"});
         model.addRow(new Object[]{"Product C", 5.99, "2025-03-20", 200, "456789123"});

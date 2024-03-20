@@ -154,9 +154,9 @@ public class Login extends JFrame {
                                 properties.load(inputStream);
 
                                 // Change property value
-                              properties.setProperty("Login.Id",mobile);
-                              properties.setProperty("Login.Pass", password);
-                              properties.setProperty("Login.Status", "true");
+	                              properties.setProperty("Login.Id",mobile);
+	                              properties.setProperty("Login.Pass", password);
+	                              properties.setProperty("Login.Status", "true");
 
                                 // Save the modified properties back to the file
                                 outputStream = new FileOutputStream("F:\\java\\javainc\\project\\config.properties");
@@ -177,6 +177,7 @@ public class Login extends JFrame {
                                 }
                             }
                             mainPage main = new mainPage();
+                            dispose();
                             
                         } 
                         else {
@@ -323,6 +324,7 @@ public class Login extends JFrame {
                             System.out.println("Data could not be saved " + databaseError.getMessage());
                         } else {
                         	mainPage main = new mainPage();
+                        	dispose();
                             System.out.println("Data saved successfully.");
                         }
                     }
