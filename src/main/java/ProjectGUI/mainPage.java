@@ -70,8 +70,10 @@ public class mainPage extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 		
+//		********************************************************************Product Panel******************************************************************************************
+		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
+		tabbedPane.addTab("Product Panel", null, panel, null);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		// Create data for the table
@@ -119,7 +121,7 @@ public class mainPage extends JFrame {
         panel.add(btn,BorderLayout.SOUTH);
         panel.add(scrollPane, BorderLayout.CENTER);
         addSampleData(model);
-		
+//		********************************************************************Bill History  Panel******************************************************************************************
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
 		
