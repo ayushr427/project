@@ -50,7 +50,7 @@ public class Login extends JFrame {
     private JPasswordField passwordField;
 
     public static void main(String[] args) throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("F:\\java\\javainc\\project\\google-services.json");
+        FileInputStream serviceAccount = new FileInputStream("D:\\Eclipse\\BillingSystem\\project\\google-services.json");
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://store-management-762de-default-rtdb.firebaseio.com")
@@ -64,7 +64,7 @@ public class Login extends JFrame {
                 
                 try {
                     // Load properties file
-                    inputStream = new FileInputStream("F:\\java\\javainc\\project\\config.properties");
+                    inputStream = new FileInputStream("D:\\Eclipse\\BillingSystem\\project\\config.properties");
                     properties.load(inputStream);
 
                     // Access variables
@@ -150,7 +150,7 @@ public class Login extends JFrame {
                             OutputStream outputStream = null;
 
                             try {
-                                inputStream = new FileInputStream("F:\\java\\javainc\\project\\config.properties");
+                                inputStream = new FileInputStream("D:\\Eclipse\\BillingSystem\\project\\config.properties");
                                 properties.load(inputStream);
 
                                 // Change property value
@@ -159,7 +159,7 @@ public class Login extends JFrame {
                               properties.setProperty("Login.Status", "true");
 
                                 // Save the modified properties back to the file
-                                outputStream = new FileOutputStream("F:\\java\\javainc\\project\\config.properties");
+                                outputStream = new FileOutputStream("D:\\Eclipse\\BillingSystem\\project\\config.properties");
                                 properties.store(outputStream, null);
 
                                 System.out.println("Property value changed successfully.");
